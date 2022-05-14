@@ -4,6 +4,7 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import Search from "./Components/Search/Search";
 import NoteList from "./Components/NoteList/NoteList";
+import StopWatch from "./Components/Timer/StopWatch";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -11,15 +12,15 @@ function App() {
   const [searchNote, setSearchNote] = useState("");
   const [darkMode, setDarkMode] = useState(true);
 
-  useEffect(()=>{
-    const savedNotes = JSON.parse(localStorage.getItem('react-notes-app-data'))
-    if(savedNotes){
-      setNotes(savedNotes)
+  useEffect(() => {
+    const savedNotes = JSON.parse(localStorage.getItem("react-notes-app-data"));
+    if (savedNotes) {
+      setNotes(savedNotes);
     }
-  },[])
-  useEffect(()=>{
-    localStorage.setItem('react-notes-app-data',JSON.stringify(notes))
-  },[notes])
+  }, []);
+  useEffect(() => {
+    localStorage.setItem("react-notes-app-data", JSON.stringify(notes));
+  }, [notes]);
 
   // adding a new note
 
@@ -40,7 +41,7 @@ function App() {
   };
 
   return (
-    <div className={`${darkMode && "dark-mode"}`}>
+    <div className={`${darkMode && "dark-mode"} main`}>
       <div className="container">
         <Header handleToggleDarkMode={setDarkMode} />
         <Search handleSearch={setSearchNote} />
@@ -52,6 +53,9 @@ function App() {
           handleDelete={deletingNote}
         />
       </div>
+      <div>
+        <StopWatch />
+        </div>
     </div>
   );
 }
